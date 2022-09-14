@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title><%= appName %> : <%= title %></title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <h1><%= appName %></h1>
+    <h2><%= title %></h2>
+    <p>Bienvenido a la página de <%= title %>.</p>
+    <p>A continuación le mostramos una lista de todos nuestros anuncios:</p>
+    
+    <% advertisements.forEach(advertisement => { %>
+      <h3><%= advertisement.name %></h3>
+      <% if (advertisement.sale === true) { %>
+        <p> Está a la venta por <%= advertisement.price %>€ </p>
+      <% } else { %>
+        <p> Se busca por <%= advertisement.price %>€ </p>
+      <% } %>
+      <img src= <%= advertisement.photo %> alt="Foto de anuncio" width= 250px>
+      <% advertisement.tags.forEach (tag => { %>
+        <div><strong># <%= tag %> </strong></div>
+      <% }) %>
+    <% }) %>
+    
   </body>
 </html>
