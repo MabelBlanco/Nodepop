@@ -26,8 +26,6 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Anuncios' });
 });
 
-router.get ('/tags', (req, res, next) => {
-  res.send ('Las etiquetas que se pueden utilizar son:')
-})
+
 
 module.exports = router;
