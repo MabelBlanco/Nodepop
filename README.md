@@ -21,8 +21,7 @@ npm install
 ```
 - También debemos tener la base de datos de MongoDB instalada en nuestro ordenador y conectada al puerto local (127.0.0.1)
 
-Ahora, 
-How can we start the app?
+Ahora, ¿Cómo podemos arrancar la app?
 
 ### Developer mode ###
 
@@ -112,5 +111,35 @@ Esta API cuenta también con una página web que, eso si, cuenta con menos funci
 
 En este caso, solo podremos realizar las peticiones correspondientes a **Listar los anuncios**, que se harían de la misma forma que en la API, con la única diferencia que se harían desde la URL de la raíz, es decir, desde: http://localhost:3000.
 
-Además, tampoco devolverían los datos en formato JSON, sino que se visualizarían en la página web de la siguiente forma:
-<i src="./public/images/muestra_web.jpg" alt="lista de anuncios">
+Además, tampoco devolverían los datos en formato JSON, sino que se visualizarían en la página web de esta forma:
+<i src="https://mabelblanco.github.io/Nodepop/nodepop/public/images/muestra_web.jpg" alt="listado de anuncios">
+
+## ORGANIZACIÓN
+
+Para empezar tenemos varios archivos en la carpeta principal:
+
+- README.md (el archivo que estás leyendo actualmente).
+- .gitignore : Archivo que sirve para que git ignore los tipos de archivos contenidos en él. En este caso, yo he añadido los que están en la carpeta node_modules.
+- package.json y package-lock.json: Archivos de configuración.
+- **initDB.js**: Este archivo inicializa la Base de Datos con los anuncios de prueba.
+- **app.js**: Este es el archivo principal, el que arranca el API, el controlador.
+
+Luego tenemos distintas carpetas:
+- bin: que guarda los datos iniciales del servidor.
+- **data**: Aquí se encuentra el archivo "initialAdvertisements.js". En él están los anuncios de prueba con los que se inicializa la base de datos si ejecutamos el archivo "initDB.js".
+- **models**: Contiene el archivo "Advertisement.js", que programa el modelo de los anuncios con *mongoose*.
+- **modules**: Contiene los módulos creados por el desarrollador. Ahora mismo solo contiene el archivo "connectMongoose.js", que conecta nuestra API con la base de datos de MongoDB.
+- **public**: 
+    - images: contiene las imágenes de los anuncios
+    - javascript: no contiene nada
+    - stylesheets: contiene las hojas de estilos css
+- **routes**:
+    - "index.js": Archivo encargado de coordinar las peticiones a la raíz del sitio y que sirve la pág web.
+    - api: A esta carpeta irán dirigidas las peticiones a la API.
+        - "advertisements.js": Coordina las peticiones relacionadas con los anuncios (listarlos, crearlos, modificarlos y eliminarlos).
+        - "tags.js": Coordina la petición para listar las tags.
+    
+- **views**: Contiene las vistas, es decir, como se van a crear las páginas web que se sirvan.
+    - "error.ejs": Muestra los errores.
+    - "header.ejs": Muestra la cabecera, que se repetirá en todas las páginas que se creen.
+    - "index.js": Muestra la página principal, que se encarga de listar los anuncios conforme a los filtros.
