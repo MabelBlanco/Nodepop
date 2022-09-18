@@ -112,7 +112,9 @@ Esta API cuenta también con una página web que, eso si, cuenta con menos funci
 En este caso, solo podremos realizar las peticiones correspondientes a **Listar los anuncios**, que se harían de la misma forma que en la API, con la única diferencia que se harían desde la URL de la raíz, es decir, desde: http://localhost:3000.
 
 Además, tampoco devolverían los datos en formato JSON, sino que se visualizarían en la página web de esta forma:
-<i src="https://mabelblanco.github.io/Nodepop/nodepop/public/images/muestra_web.jpg" alt="listado de anuncios">
+
+
+<img src="https://mabelblanco.github.io/Nodepop/nodepop/public/images/muestra_web.jpg" alt="listado de anuncios" width="200">
 
 ## ORGANIZACIÓN
 
