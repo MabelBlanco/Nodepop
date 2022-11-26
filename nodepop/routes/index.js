@@ -1,61 +1,61 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
 
-const Advertisement = require('../models/Advertisement')
+const Advertisement = require("../models/Advertisement");
 
 /* GET home page. */
-router.get('/', async function(req, res, next) {
-
+router.get("/", async function (req, res, next) {
   try {
     //filters
-    const name = req.query.name
-    const sale = req.query.sale
-    const price = req.query.price
-    const tags = req.query.tags
+    const name = req.query.name;
+    const sale = req.query.sale;
+    const price = req.query.price;
+    const tags = req.query.tags;
 
     //pagination
-    const skip = req.query.skip
-    const limit = req.query.limit
+    const skip = req.query.skip;
+    const limit = req.query.limit;
 
-    const filter = {}
+    const filter = {};
 
     if (name) {
-      filter.name = {'$regex' : '^' + name, $options : 'i'}
+      filter.name = { $regex: "^" + name, $options: "i" };
     }
     if (sale) {
-      filter.sale = sale
+      filter.sale = sale;
     }
     if (price) {
       // create the filter price (min and max)
-      const priceArray = price.split ("-")
+      const priceArray = price.split("-");
       if (priceArray.length > 1) {
-        const pricemin = priceArray[0]
-        const pricemax = priceArray [1]
-        
-        if (pricemin === '') {
-          filter.price = {'$lte' : pricemax}
-        } else if (pricemax === '') {
-          filter.price = {'$gte': pricemin}
+        const pricemin = priceArray[0];
+        const pricemax = priceArray[1];
+
+        if (pricemin === "") {
+          filter.price = { $lte: pricemax };
+        } else if (pricemax === "") {
+          filter.price = { $gte: pricemin };
         } else {
-          filter.price = {'$gte': pricemin, '$lte' : pricemax}
+          filter.price = { $gte: pricemin, $lte: pricemax };
         }
-      
       } else {
-      filter.price = price
+        filter.price = price;
       }
     }
     if (tags) {
-      filter.tags = tags
+      filter.tags = tags;
     }
 
-  res.locals.advertisements = await Advertisement.find(filter).skip(skip).limit(limit)
+    res.locals.advertisements = await Advertisement.find(filter)
+      .skip(skip)
+      .limit(limit);
 
-  res.render('index', { title: 'Anuncios' });
+    res.render("index", {
+      title: res.__n("Advertisements", res.locals.advertisements.length),
+    });
   } catch (error) {
-    next(error)
+    next(error);
   }
 });
-
-
 
 module.exports = router;
