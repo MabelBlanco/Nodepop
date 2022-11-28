@@ -2,29 +2,70 @@
 <html>
   <head>
     <title><%= appName %> : <%= title %></title>
-    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <!-- Favicon-->
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <!-- Bootstrap icons-->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="css/styles.css" rel="stylesheet" />
   </head>
   <body>
     <h1><%= appName %></h1>
     <h2><%= title %></h2>
-    <% include header.ejs %>
-    <p><%= __('Welcome to page') %> <%= title %>.</p>
-    <p><%= __('Here is a list of all our advertisements:')%></p>
-
-    <% advertisements.forEach(advertisement => { %>
-    <h3><%= advertisement.name %></h3>
-    <% if (advertisement.sale === true) { %>
-    <p><%= __('It is for sale by') %> <%= advertisement.price %>€</p>
-    <% } else { %>
-    <p><%= __('Wanted by') %> <%= advertisement.price %>€</p>
-    <% } %>
-    <img
-      src="<%= advertisement.photo %>"
-      alt="<%= __('Advertisement Photo') %>"
-      width="250px"
-    />
-    <% advertisement.tags.forEach (tag => { %>
-    <div><strong># <%= tag %> </strong></div>
-    <% }) %> <% }) %>
+    <% include navigation.ejs %> <% include header.ejs %>
+    <section class="py-5">
+      <div class="container px-4 px-lg-5 mt-5">
+        <div
+          class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center"
+        >
+          <% advertisements.forEach(advertisement => { %>
+          <div class="col mb-5">
+            <div class="card h-100">
+              <!-- Sale badge-->
+              <div
+                class="badge bg-dark text-white position-absolute"
+                style="top: 0.5rem; right: 0.5rem"
+              >
+                <% if (advertisement.sale === true) { %> <%= __('Sale') %> <% }
+                else { %> <%= __('Buy') %> <% } %>
+              </div>
+              <!-- Product image-->
+              <img
+                class="card-img-top"
+                src="<%= advertisement.photo %>"
+                alt="<%= __('Advertisement Photo') %>"
+                width="250px"
+              />
+              <!-- Product details-->
+              <div class="card-body p-4">
+                <div class="text-center">
+                  <!-- Product name-->
+                  <h5 class="fw-bolder"><%= advertisement.name %></h5>
+                  <!-- Product price-->
+                  <div><%= advertisement.price %>€</div>
+                </div>
+              </div>
+              <!-- Product actions-->
+              <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                <div class="text-center">
+                  <% advertisement.tags.forEach (tag => { %>
+                  <div><strong># <%= tag %> </strong></div>
+                  <% }) %>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% }) %>
+        </div>
+      </div>
+    </section>
   </body>
+  <footer><% include footer.ejs %></footer>
+  <!-- Bootstrap core JS-->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Core theme JS-->
+  <script src="../public/js/scripts.js"></script>
 </html>
