@@ -1,13 +1,11 @@
 {
-	"Welcome to page": "Bienvenido a la página de",
-	"Advertisements": {
-		"one": "Anuncio",
-		"other": "Anuncios"
-	},
-	"Here is a list of all our advertisements:": "A continuación le mostramos una lista de todos nuestros anuncios:",
-	"It is for sale by": "Está a la venta por",
-	"Wanted by": "Se busca por",
-	"Advertisement Photo": "Foto de anuncio",
-	"Sale": "Sale",
-	"Buy": "Buy"
+  "Welcome to page": "Bienvenido a la página de",
+  "Advertisements": {
+    "one": "Anuncio",
+    "other": "Anuncios"
+  },
+  "Here is a list of all our advertisements:": "A continuación le mostramos una lista de todos nuestros anuncios:",
+  "Advertisement Photo": "Foto de anuncio",
+  "Sale": "Venta",
+  "Buy": "Compra"
 }

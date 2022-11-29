@@ -5,6 +5,7 @@ var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
+const changeLocaleRouter = require("./routes/changeLocale");
 const advertisementsRouter = require("./routes/api/advertisements");
 const tagsRouter = require("./routes/api/tags");
 const i18n = require("./modules/i18nConfig");
@@ -35,6 +36,7 @@ app.use(i18n.init);
 
 //WEBSITE ROUTES
 app.use("/", indexRouter);
+app.use("/changeLocale", changeLocaleRouter);
 
 // API ROUTES
 app.use("/api/advertisements", advertisementsRouter);

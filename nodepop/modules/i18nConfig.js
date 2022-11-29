@@ -7,6 +7,7 @@ i18n.configure({
   defaultLocale: "en",
   autoReload: true,
   syncFiles: true,
+  cookie: "nodepopLanguage",
 });
 
 i18n.setLocale("en");
