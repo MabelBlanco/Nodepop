@@ -1,11 +1,17 @@
 {
-  "Welcome to page": "Welcome to page",
-  "Advertisements": {
-    "one": "Advertisement",
-    "other": "Advertisements"
-  },
-  "Here is a list of all our advertisements:": "Here is a list of all our advertisements:",
-  "Advertisement Photo": "Advertisement Photo",
-  "Sale": "Sale",
-  "Buy": "Buy"
+	"Welcome to page": "Welcome to page",
+	"Advertisements": {
+		"one": "Advertisement",
+		"other": "Advertisements"
+	},
+	"Here is a list of all our advertisements:": "Here is a list of all our advertisements:",
+	"Advertisement Photo": "Advertisement Photo",
+	"Sale": "Sale",
+	"Buy": "Buy",
+	"Login": "Login",
+	"Email address": "Email address",
+	"We'll never share your email with anyone else.": "We'll never share your email with anyone else.",
+	"Password": "Password",
+	"Check me out": "Check me out",
+	"Submit": "Submit"
 }

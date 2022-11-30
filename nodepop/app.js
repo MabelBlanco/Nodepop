@@ -6,8 +6,10 @@ var logger = require("morgan");
 
 var indexRouter = require("./routes/index");
 const changeLocaleRouter = require("./routes/changeLocale");
+const loginRouter = require("./routes/login");
 const advertisementsRouter = require("./routes/api/advertisements");
 const tagsRouter = require("./routes/api/tags");
+
 const i18n = require("./modules/i18nConfig");
 
 var app = express();
@@ -38,6 +40,7 @@ app.use(i18n.init);
 //WEBSITE ROUTES
 app.use("/", indexRouter);
 app.use("/changeLocale", changeLocaleRouter);
+app.use("/login", loginRouter);
 
 // API ROUTES
 app.use("/api/advertisements", advertisementsRouter);
