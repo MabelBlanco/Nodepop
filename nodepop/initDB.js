@@ -40,7 +40,7 @@ async function initUsers() {
   const deleted = await User.deleteMany();
   console.log(`Se han eliminado ${deleted.deletedCount} usuarios.`);
 
-  const inserted = await User.insertMany(initialUsers);
+  const inserted = await User.insertMany(await initialUsers);
 
   console.log(`Se han creado ${inserted.length} usuarios.`);
 }

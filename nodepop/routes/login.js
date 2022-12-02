@@ -26,7 +26,7 @@ router.post("/", async (req, res, next) => {
       return;
     }
 
-    if (user.password !== password) {
+    if (!(await user.comparePasswords(password))) {
       res.render("login", {
         title: res.__("Login"),
         error: res.__("Wrong password"),
