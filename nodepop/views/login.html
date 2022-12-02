@@ -17,7 +17,7 @@
   <body>
     <% include navigation.html %>
 
-    <form class="login-form-nodepop">
+    <form class="login-form-nodepop" method="POST">
       <div class="mb-3">
         <label for="exampleInputEmail1" class="form-label"
           ><%= __("Email address") %></label
@@ -26,6 +26,8 @@
           type="email"
           class="form-control"
           id="exampleInputEmail1"
+          name="email"
+          value="<%= email %>"
           aria-describedby="emailHelp"
         />
         <div id="emailHelp" class="form-text">
@@ -40,6 +42,7 @@
           type="password"
           class="form-control"
           id="exampleInputPassword1"
+          name="password"
         />
       </div>
       <div class="mb-3 form-check">
@@ -51,6 +54,7 @@
       <button type="submit" class="btn btn-outline-dark nodepop-button">
         <%= __("Submit") %>
       </button>
+      <span><%= error %></span>
     </form>
   </body>
 

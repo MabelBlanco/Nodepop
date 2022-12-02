@@ -1,17 +1,21 @@
 {
-  "Welcome to page": "Bienvenido a la página de",
-  "Advertisements": {
-    "one": "Anuncio",
-    "other": "Anuncios"
-  },
-  "Here is a list of all our advertisements:": "A continuación le mostramos una lista de todos nuestros anuncios:",
-  "Advertisement Photo": "Foto de anuncio",
-  "Sale": "Venta",
-  "Buy": "Compra",
-  "Login": "Entrar",
-  "Email address": "Dirección de e-mail",
-  "We'll never share your email with anyone else.": "Nunca compartiremos tu email con nadie más.",
-  "Password": "Contraseña",
-  "Check me out": "Guárdame",
-  "Submit": "Enviar"
+	"Welcome to page": "Bienvenido a la página de",
+	"Advertisements": {
+		"one": "Anuncio",
+		"other": "Anuncios"
+	},
+	"Here is a list of all our advertisements:": "A continuación le mostramos una lista de todos nuestros anuncios:",
+	"Advertisement Photo": "Foto de anuncio",
+	"Sale": "Venta",
+	"Buy": "Compra",
+	"Login": "Entrar",
+	"Email address": "Dirección de e-mail",
+	"We'll never share your email with anyone else.": "Nunca compartiremos tu email con nadie más.",
+	"Password": "Contraseña",
+	"Check me out": "Guárdame",
+	"Submit": "Enviar",
+	"This email do not have an account": "Este e-mail no se corresponde con ninguna cuenta.",
+	"Wrong password": "Contraseña incorrecta",
+	"User Profile": "User Profile",
+	"Your Profile": "Your Profile"
 }
