@@ -34,9 +34,17 @@ router.post("/", async (req, res, next) => {
       });
       return;
     }
+    // Save the userId in cookie-session
+    req.session.userId = user._id;
 
     res.redirect("/userProfile");
   } catch (error) {}
+});
+
+router.get("/logout", (req, res, next) => {
+  req.session.regenerate((error) => {
+    error ? next(error) : res.redirect("/");
+  });
 });
 
 module.exports = router;

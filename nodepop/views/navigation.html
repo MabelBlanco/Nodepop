@@ -27,9 +27,16 @@
         
     </div>
     <form class="d-flex">
+      <% if (session.userId) { %>
+      <a class="nav-link" href="/userProfile"><%= __('My Profile') %></a>
+      <a class="btn btn-outline-dark" href="/login/logout">
+        Logout
+      </a>
+      <% } else { %>
       <a class="btn btn-outline-dark" href="/login">
           Login
       </a>
+      <% } %>
     </form>
   </div>
 </nav>

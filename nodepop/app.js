@@ -3,6 +3,10 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
+const session = require("express-session");
+const MongoStore = require("connect-mongo");
+
+const authMiddleware = require("./modules/authMiddleware");
 
 var indexRouter = require("./routes/index");
 const changeLocaleRouter = require("./routes/changeLocale");
@@ -40,10 +44,31 @@ app.use((req, res, next) => {
 app.use(i18n.init);
 
 //WEBSITE ROUTES
+app.use(
+  session({
+    name: "nodepop-session",
+    secret: "-@kFnl[]I9|Ff:.",
+    saveUninitialized: true,
+    resave: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60 * 24, // the cookie expires after 1 day to inactivity
+    },
+    store: MongoStore.create({
+      mongoUrl: process.env.MONGODB_CONNECTION_STRING,
+    }),
+  })
+);
+
+app.use((req, res, next) => {
+  // With this middleware, we can access session at views
+  res.locals.session = req.session;
+  next();
+});
+
 app.use("/", indexRouter);
 app.use("/changeLocale", changeLocaleRouter);
 app.use("/login", loginRouter);
-app.use("/userProfile", userProfileRouter);
+app.use("/userProfile", authMiddleware, userProfileRouter);
 
 // API ROUTES
 app.use("/api/advertisements", advertisementsRouter);
