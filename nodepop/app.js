@@ -7,12 +7,14 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 
 const authMiddleware = require("./modules/authMiddleware");
+const jwtAuthMiddleware = require("./modules/jwtAuthMiddleware");
 
 var indexRouter = require("./routes/index");
 const changeLocaleRouter = require("./routes/changeLocale");
 const loginRouter = require("./routes/login");
 const userProfileRouter = require("./routes/userProfile");
 
+const loginApiRouter = require("./routes/api/loginApi");
 const advertisementsRouter = require("./routes/api/advertisements");
 const tagsRouter = require("./routes/api/tags");
 
@@ -71,7 +73,8 @@ app.use("/login", loginRouter);
 app.use("/userProfile", authMiddleware, userProfileRouter);
 
 // API ROUTES
-app.use("/api/advertisements", advertisementsRouter);
+app.use("/api/login", loginApiRouter);
+app.use("/api/advertisements", jwtAuthMiddleware, advertisementsRouter);
 app.use("/api/tags", tagsRouter);
 
 // catch 404 and forward to error handler

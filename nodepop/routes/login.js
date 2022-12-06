@@ -38,7 +38,9 @@ router.post("/", async (req, res, next) => {
     req.session.userId = user._id;
 
     res.redirect("/userProfile");
-  } catch (error) {}
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.get("/logout", (req, res, next) => {
