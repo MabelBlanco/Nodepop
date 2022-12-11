@@ -17,6 +17,10 @@ Para el módulo "Backend Avanzado" nos han solicitado que también:
 - Contenga internacionalización.
 - A los datos de anuncios del API solo se pueda acceder si el usuario está logado. Y hemos de hacerlo mediante un token JWT.
 
+Y como opcional:
+
+- Gestionar subida de ficheros (imagen para anuncio)
+
 ## COMO EMPEZAR
 
 - Para empezar, debemos tener Nodejs instalado, lo mejor es utilizar nvm como gestor de versiones.
@@ -122,7 +126,17 @@ http://localhost:3000/api/advertisements/?tags=mobile&sale=false&name=ip&precio=
 
 - **Añadir un anuncio**:
 
-Realizando una petición **POST a "/api/advertisements"** e introduciendo en el body los datos del anuncio que queremos crear.
+Realizando una petición **POST a "/api/advertisements"** e introduciendo en el body, con el formato **Multipart form-data** los datos del anuncio que queremos crear:
+
+    - name: obligatorio
+
+    - sale: obligatorio
+
+    - price: obligatorio
+
+    - photo: opcional, se debe subir un fichero de imagen.
+
+    - tags: obligatorio
 
 Ésta petición devolverá como resultado el anuncio creado.
 

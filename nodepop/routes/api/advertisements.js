@@ -1,100 +1,107 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
+const upload = require("../../modules/uploadConfig");
 
-const Advertisement = require ('../../models/Advertisement')
+const Advertisement = require("../../models/Advertisement");
 
-router.get ('/', async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     //filters
-    const name = req.query.name
-    const sale = req.query.sale
-    const price = req.query.price
-    const tags = req.query.tags
+    const name = req.query.name;
+    const sale = req.query.sale;
+    const price = req.query.price;
+    const tags = req.query.tags;
 
     //pagination
-    const skip = req.query.skip
-    const limit = req.query.limit
+    const skip = req.query.skip;
+    const limit = req.query.limit;
 
     // create the filter
-    const filter = {}
+    const filter = {};
 
     if (name) {
-      filter.name = {'$regex' : '^' + name, $options : 'i'}
+      filter.name = { $regex: "^" + name, $options: "i" };
     }
     if (sale) {
-      filter.sale = sale
+      filter.sale = sale;
     }
     if (price) {
       // create the filter price (min and max)
-      const priceArray = price.split ("-")
+      const priceArray = price.split("-");
       if (priceArray.length > 1) {
-        const pricemin = priceArray[0]
-        const pricemax = priceArray [1]
-        
-        if (pricemin === '') {
-          filter.price = {'$lte' : pricemax}
-        } else if (pricemax === '') {
-          filter.price = {'$gte': pricemin}
+        const pricemin = priceArray[0];
+        const pricemax = priceArray[1];
+
+        if (pricemin === "") {
+          filter.price = { $lte: pricemax };
+        } else if (pricemax === "") {
+          filter.price = { $gte: pricemin };
         } else {
-          filter.price = {'$gte': pricemin, '$lte' : pricemax}
+          filter.price = { $gte: pricemin, $lte: pricemax };
         }
-      
       } else {
-      filter.price = price
+        filter.price = price;
       }
     }
     if (tags) {
-      filter.tags = tags
+      filter.tags = tags;
     }
 
+    const advertisements = await Advertisement.find(filter)
+      .skip(skip)
+      .limit(limit);
 
-    const advertisements = await Advertisement.find(filter).skip(skip).limit(limit)
-    
-    res.json ({results: advertisements})
+    res.json({ results: advertisements });
   } catch (error) {
-    next(error)
+    next(error);
   }
-    
-})
+});
 
-router.put ('/:id', async (req, res, next) => {
+router.put("/:id", async (req, res, next) => {
   try {
-    const idAdvertisement = req.params.id
-    const body = req.body
+    const idAdvertisement = req.params.id;
+    const body = req.body;
 
-    const advertisementModified = await Advertisement.findOneAndUpdate({_id : idAdvertisement}, body, {new:true})
+    const advertisementModified = await Advertisement.findOneAndUpdate(
+      { _id: idAdvertisement },
+      body,
+      { new: true }
+    );
 
-    res.json (advertisementModified)
+    res.json(advertisementModified);
   } catch (error) {
-    next (error)
+    next(error);
   }
-})
+});
 
-router.post ('/', async (req, res, next) => {
+router.post("/", upload.single("photo"), async (req, res, next) => {
   try {
-    const bodyAdvertisement = req.body
+    const bodyAdvertisement = req.body;
 
-    const newAdvertisement = new Advertisement (bodyAdvertisement)
+    bodyAdvertisement.photo = `http://localhost:3000/images/advertisements/${req.file.filename}`;
 
-    const saveAdvertisement = await newAdvertisement.save ()
+    const newAdvertisement = new Advertisement(bodyAdvertisement);
 
-    res.json ({result: saveAdvertisement})
+    const saveAdvertisement = await newAdvertisement.save();
 
+    res.json({ result: saveAdvertisement });
   } catch (error) {
-    next (error)
+    next(error);
   }
-})
+});
 
-router.delete ('/:id', async (req, res, next) => {
+router.delete("/:id", async (req, res, next) => {
   try {
-    const idAdvertisement = req.params.id
+    const idAdvertisement = req.params.id;
 
-    const advertisementDeleted = await Advertisement.findOneAndDelete({_id : idAdvertisement})
+    const advertisementDeleted = await Advertisement.findOneAndDelete({
+      _id: idAdvertisement,
+    });
 
-    res.json (advertisementDeleted)
+    res.json(advertisementDeleted);
   } catch (error) {
-    next (error)
+    next(error);
   }
-})
+});
 
-module.exports = router
+module.exports = router;
